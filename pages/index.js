@@ -1,11 +1,13 @@
 // use rafce to display react boilerplate code to start us off
 // install es7 snippet extension for this
 import React from 'react'
+import { client } from '../lib/client'
+import { Product, FooterBanner, HeroBanner } from '../components'
 
 const Home = () => {
   return (  
     <>
-      HeroBanner 
+      <HeroBanner/> 
 
       <div className='products-heading'>
         <h2>Best Selling Products</h2>
@@ -18,7 +20,7 @@ const Home = () => {
         }
       </div>
 
-      Footer
+      <FooterBanner/>
     </>
   )
 }
