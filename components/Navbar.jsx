@@ -16,6 +16,9 @@ const Navbar = () => {
           1
         </span>
       </button>
+
+      
+
     </div>
   )
 }
