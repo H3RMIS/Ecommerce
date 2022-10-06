@@ -1,0 +1,1 @@
+//[slug] unique identifier of each product ,,inside square brackets to show that is going to be dynamic
