@@ -1,7 +1,7 @@
 //[slug] unique identifier of each product ,,inside square brackets to show that is going to be dynamic
 //eg product/speaker - it dynamically renders the product clicked/selected
 
-import React from 'react'
+import React, { useState } from 'react'
 import { client, urlFor } from '../../lib/client'
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { Product } from  '../../components';
