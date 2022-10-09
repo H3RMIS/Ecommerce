@@ -12,6 +12,20 @@ export const StateContext = ( { children } ) => {
     const [totalPrice, settotalPrice] = useState() //keep track of the total price 
     const [totalQuantities, settotalQuantities] = useState() //to know the quantities of the items you are working with
     const [qty, setqty] = useState(1)
-    
+
+    return (
+        <Context.Provider
+        value={{
+            showCart,
+            cartItems,
+            totalPrice,
+            totalPrice,
+            totalQuantities,
+            qty
+        }}
+        >  
+            {children}
+        </Context.Provider>
+    )
 }
 
