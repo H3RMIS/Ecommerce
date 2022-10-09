@@ -13,6 +13,8 @@ export const StateContext = ( { children } ) => {
     const [totalQuantities, settotalQuantities] = useState() //to know the quantities of the items you are working with
     const [qty, setqty] = useState(1)
 
+    // return ContextProvider wrapping the values(state fields) that will be passed in the entire application
+    //The values passed can be accessed from any of the components
     return (
         <Context.Provider
         value={{
