@@ -20,11 +20,11 @@ export const StateContext = ( { children } ) => {
     const onAdd = (product, quantity) => {
         //check if the product being added is already in the cart
         const checkProductInCart = cartItems.find((item) => item._id === product._id);
+        settotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity)
+        settotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity)
 
         //this will be executed if trying to add an item that already exists in the cart
         if(checkProductInCart) {
-            settotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity)
-            settotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity)
 
             const updatedcartItems = cartItems.map((cartProduct) => {
                 if(cartProduct._id === product._id) return {
@@ -37,8 +37,13 @@ export const StateContext = ( { children } ) => {
             //,instead it increments the quantity
             //number and total price
             setcartItems(updatedcartItems);
-            toast.success(`${qty} ${product.name} added to cart`)
+        }else{
+            //item does not exist in the cart
+            //i)Update the products quantity
+            product.quantity = quantity;
+            setcartItems([...cartItems, { ...product }]);
         }
+        toast.success(`${qty} ${product.name} added to the cart`)
     }
 
     //dynamic update quantity function to manage incrementing items 
@@ -63,6 +68,7 @@ export const StateContext = ( { children } ) => {
             qty,
             incQty,
             decQty,
+            onAdd,
         }}
         >  
             {children}
