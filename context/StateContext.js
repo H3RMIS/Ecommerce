@@ -16,19 +16,42 @@ export const StateContext = ( { children } ) => {
     // return ContextProvider wrapping the values(state fields) that will be passed in the entire application
     //The values passed can be accessed from any of the componentsci
 
+    //function to add products to cart when add to cart button is clicked
+    const onAdd = (product, quantity) => {
+        //check if the product being added is already in the cart
+        const checkProductInCart = cartItems.find((item) => item._id === product._id);
+
+        //this will be executed if trying to add an item that already exists in the cart
+        if(checkProductInCart) {
+            settotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity)
+            settotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity)
+
+            const updatedcartItems = cartItems.map((cartProduct) => {
+                if(cartProduct._id === product._id) return {
+                    ...cartProduct,
+                    quantity: cartProduct.quantity + quantity
+                }
+            })
+            //allows adding of the same product but not adding a duplicated
+            //the code tells that the item is already available in the cart
+            //,instead it increments the quantity
+            //number and total price
+            setcartItems(updatedcartItems);
+            toast.success(`${qty} ${product.name} added to cart`)
+        }
+    }
+
     //dynamic update quantity function to manage incrementing items 
     const incQty = () => {
-        setQty(( prevQty ) => prevQty + 1);
+        setqty(( prevQty ) => prevQty + 1);
     }
     const decQty = () => {
-        setQty((prevQty) => {
+        setqty((prevQty) => {
             if(prevQty - 1 < 1) return 1;
 
-            return prevQty -1
+            return prevQty -1;
         });
     }
-
-
     return (
         <Context.Provider
         value={{
@@ -47,3 +70,4 @@ export const StateContext = ( { children } ) => {
     )
 }
 
+export const useSateContext = () => useContext(Context);
