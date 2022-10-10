@@ -6,11 +6,11 @@ import { toast } from 'react-hot-toast'; //imported toast for pop up notificatio
 const Context = createContext(); //call as hook
 export const StateContext = ( { children } ) => {
     //create the states
-    const [showCart, setshowCart] = useState(false); //manage the state of the cart if it's being shown or not
-    const [cartItems, setcartItems] = useState() //to know what items are in the cart. Will be filled with data coming from local storage
+    const [showCart, setShowCart] = useState(false); //manage the state of the cart if it's being shown or not
+    const [cartItems, setcartItems] = useState([]) //to know what items are in the cart. Will be filled with data coming from local storage
     //when user leaves site, the items will no get erased.
     const [totalPrice, settotalPrice] = useState() //keep track of the total price 
-    const [totalQuantities, settotalQuantities] = useState() //to know the quantities of the items you are working with
+    const [totalQuantities, settotalQuantities] = useState(0) //to know the quantities of the items you are working with
     const [qty, setqty] = useState(1)
 
     // return ContextProvider wrapping the values(state fields) that will be passed in the entire application
@@ -61,6 +61,7 @@ export const StateContext = ( { children } ) => {
         <Context.Provider
         value={{
             showCart,
+            setShowCart,
             cartItems,
             totalPrice,
             totalPrice,
@@ -76,4 +77,4 @@ export const StateContext = ( { children } ) => {
     )
 }
 
-export const useSateContext = () => useContext(Context);
+export const useStateContext = () => useContext(Context);
