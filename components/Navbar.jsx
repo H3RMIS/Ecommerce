@@ -2,8 +2,10 @@ import React from 'react'
 import Link from 'next/link'
 import { AiOutlineShopping } from 'react-icons/ai' //shopping icon
 import { Cart } from './';
+import { useSateContext } from '../context/StateContext';
 
 const Navbar = () => {
+   
   return (
     <div className='navbar-container'>
       <p className='logo'>
