@@ -5,11 +5,13 @@ import React, { useState } from 'react'
 import { client, urlFor } from '../../lib/client'
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { Product } from  '../../components';
+import { useSateContext } from '../../context/StateContext';
 
 const ProductDetails = ({ product, products }) => {
     
     const{ image, name, details, price } = product;   
-    const [index, setIndex] = useState(0)
+    const [index, setIndex] = useState(0);
+    const { decQty, incQty, qty } = useSateContext();
 
   return (
     <div>
