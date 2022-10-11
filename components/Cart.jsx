@@ -9,10 +9,31 @@ import { urlFor } from '../lib/client';
 const Cart = () => {
   const cartRef = useRef()
   const { totalPrice, totalQuantities,cartItems, setShowCart } = useStateContext();
-  
+
   return (
-    <div>
-      Cart
+    <div className='cart-wrapper' ref={cartRef} >
+      <div className='cart-container'>
+        <button type='button' className='cart-heading' onClick={() => setShowCart(false)}>
+          <AiOutlineLeft/>
+          <span className='heading'>Your Cart</span>
+          <span className='cart- num-items'>({ totalQuantities } items)</span>
+        </button>
+        {/* render the items added to cart */}
+        {cartItems.length < 1 && (
+          <div className='empty-cart'>
+              <AiOutlineShopping size={150}/>
+              <h3>You have not added any items</h3>
+              <Link href="/">
+                <button type='button'
+                onClick={() => setShowCart(false)}
+                className="btn"
+                >
+                  Continue Shopping
+                </button>
+              </Link>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
