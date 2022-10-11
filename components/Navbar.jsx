@@ -10,9 +10,9 @@ const Navbar = () => {
 
     <div className='navbar-container'>
       <p className='logo'>
-        <Link href='/'>H3RMES Store</Link>
+        <Link href='/'>HERMES Store</Link>
       </p>
-
+    
       <button type='button' className='cart-icon' onClick={() => setShowCart(true)}>
         <AiOutlineShopping/>
         <span className='cart-item-qty'>
@@ -20,6 +20,7 @@ const Navbar = () => {
         </span>
       </button>
       
+      {/* show the cart only it is set to true*/}
       {showCart && <Cart/>}
 
     </div>

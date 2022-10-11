@@ -12,7 +12,7 @@ export default{
             options: {
                 hotspot: true, 
             }
-            // hotspot is Sanity image property 
+            // hotspot is a Sanity image property 
             // that enables selecting of the area of the image that should cropped or resized
             // or better position the image when uploaded
         },
