@@ -9,7 +9,7 @@ export const StateContext = ( { children } ) => {
     const [showCart, setShowCart] = useState(false); //manage the state of the cart if it's being shown or not
     const [cartItems, setcartItems] = useState([]) //to know what items are in the cart. Will be filled with data coming from local storage
     //when user leaves site, the items will no get erased.
-    const [totalPrice, settotalPrice] = useState() //keep track of the total price 
+    const [totalPrice, settotalPrice] = useState(0) //keep track of the total price 
     const [totalQuantities, settotalQuantities] = useState(0) //to know the quantities of the items you are working with
     const [qty, setqty] = useState(1)
 
