@@ -14,7 +14,9 @@ export const StateContext = ( { children } ) => {
     const [qty, setqty] = useState(1)
 
     
-
+    let foundProduct; //product in cart
+    let index;// index of product in cart
+    
     // return ContextProvider wrapping the values(state fields) that will be passed in the entire application
     //The values passed can be accessed from any of the componentsci
 
