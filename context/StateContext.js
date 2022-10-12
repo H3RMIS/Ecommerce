@@ -9,7 +9,7 @@ export const StateContext = ( { children } ) => {
     const [showCart, setShowCart] = useState(false); //manage the state of the cart if it's being shown or not
     const [cartItems, setCartItems] = useState([]) //to know what items are in the cart. Will be filled with data coming from local storage
     //when user leaves site, the items will no get erased.
-    const [totalPrice, settotalPrice] = useState(0) //keep track of the total price 
+    const [totalPrice, setTotalPrice] = useState(0) //keep track of the total price 
     const [totalQuantities, settotalQuantities] = useState(0) //to know the quantities of the items you are working with
     const [qty, setqty] = useState(1)
 
@@ -24,7 +24,7 @@ export const StateContext = ( { children } ) => {
     const onAdd = (product, quantity) => {
         //check if the product being added is already in the cart
         const checkProductInCart = cartItems.find((item) => item._id === product._id);
-        settotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity)
+        setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity)
         settotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity)
 
         //this will be executed if trying to add an item that already exists in the cart
@@ -58,9 +58,10 @@ export const StateContext = ( { children } ) => {
         if(value === 'inc'){
             //updating the cartItems with the current cartItems adding one element to it 
             //then spreading the properties and increasing the quantity by one.
-            setCartItems([...cartItems, { ...product, quantity: product.quantity + 1  }]);
+            setCartItems([...cartItems, { ...foundProduct, quantity: foundProduct.quantity + 1  }]);
             //setting the new price after adding item
-            settotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price) 
+            setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price) 
+            settotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
         } else if(value === 'dec'){
             
         }
