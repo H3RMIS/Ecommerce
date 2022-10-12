@@ -2,6 +2,7 @@
 //import react hooks
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast'; //imported toast for pop up notification when item is added to cart
+import product from '../sanityecommerce/schemas/product';
 
 const Context = createContext(); //call as hook
 export const StateContext = ( { children } ) => {
@@ -47,33 +48,38 @@ export const StateContext = ( { children } ) => {
             product.quantity = quantity;
             setCartItems([...cartItems, { ...product }]);
         }
-        toast.success(`${qty} ${product.name} added to the cart`)
+        toast.success(`${qty} ${product.name} added to the cart`);
+    }
+
+    const onRemove = (product) => {
+        foundProduct = cartItems.find((item) => item._id === id);
+        const currCartItems = cartItems.filter((item) => item._id !== id)
+
+        setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity)
+        settotalQuantities((prevTotalQuantities) => prevTotalQuantities - foundProduct.quantity)
+        setCartItems(currCartItems)
     }
 
     //function to increment/decrement number of the select product in cart
     const toggleCartItemQuantity = (id, value) => {
         foundProduct = cartItems.find((item) => item._id === id);
         index = cartItems.findIndex((product) => product._id === id);
-        const currCartItem = cartItems.filter((item) => item._id !== id)
         //filter method to keep the items and not the one being updated  
-        // const newCartItems = cartItems.filter((item) => item._id !== id) 
-
+        const currCartItems = cartItems.filter((item) => item._id !== id)
+        
         if(value === 'inc'){
-
-            currCartItem.splice(index, 0, {...foundProduct, quantity: foundProduct.quantity+1})
-            setCartItems(currCartItem)
-
             //updating the cartItems with the current cartItems adding one element to it 
             //then spreading the properties and increasing the quantity by one.
-            // setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1  }]);
+            currCartItems.splice(index, 0, {...foundProduct, quantity: foundProduct.quantity+1})
+            setCartItems(currCartItems)
+
             //setting the new price after adding item
             setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price) 
             settotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
         } else if(value === 'dec'){
             if(foundProduct.quantity > 1){
-                currCartItem.splice(index, 0, {...foundProduct, quantity: foundProduct.quantity-1})
-                setCartItems(currCartItem)    
-                // setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity - 1  }]);
+                currCartItems.splice(index, 0, {...foundProduct, quantity: foundProduct.quantity-1})
+                setCartItems(currCartItems)    
                 //setting the new price after reducing the number of items
                 setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price) 
                 settotalQuantities(prevTotalQuantities => prevTotalQuantities - 1)
@@ -106,6 +112,7 @@ export const StateContext = ( { children } ) => {
             decQty,
             onAdd,
             toggleCartItemQuantity,
+            onRemove,
         }}
         >  
             {children}
