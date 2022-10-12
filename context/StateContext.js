@@ -56,7 +56,11 @@ export const StateContext = ( { children } ) => {
         index = cartItems.findIndex((product) => product._id === id);
 
         if(value === 'inc'){
+            //updating the cartItems with the current cartItems adding one element to it 
+            //then spreading the properties and increasing the quantity by one.
             setCartItems([...cartItems, { ...product, quantity: product.quantity + 1  }]);
+            //setting the new price after adding item
+            settotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price) 
         } else if(value === 'dec'){
             
         }
