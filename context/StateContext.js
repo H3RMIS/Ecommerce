@@ -54,20 +54,26 @@ export const StateContext = ( { children } ) => {
     const toggleCartItemQuantity = (id, value) => {
         foundProduct = cartItems.find((item) => item._id === id);
         index = cartItems.findIndex((product) => product._id === id);
-
+        const currCartItem = cartItems.filter((item) => item._id !== id)
         //filter method to keep the items and not the one being updated  
-        const newCartItems = cartItems.filter((item) => item._id !== id) 
+        // const newCartItems = cartItems.filter((item) => item._id !== id) 
 
         if(value === 'inc'){
+
+            currCartItem.splice(index, 0, {...foundProduct, quantity: foundProduct.quantity+1})
+            setCartItems(currCartItem)
+
             //updating the cartItems with the current cartItems adding one element to it 
             //then spreading the properties and increasing the quantity by one.
-            setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1  }]);
+            // setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1  }]);
             //setting the new price after adding item
             setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price) 
             settotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
         } else if(value === 'dec'){
             if(foundProduct.quantity > 1){
-                setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity - 1  }]);
+                currCartItem.splice(index, 0, {...foundProduct, quantity: foundProduct.quantity-1})
+                setCartItems(currCartItem)    
+                // setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity - 1  }]);
                 //setting the new price after reducing the number of items
                 setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price) 
                 settotalQuantities(prevTotalQuantities => prevTotalQuantities - 1)
