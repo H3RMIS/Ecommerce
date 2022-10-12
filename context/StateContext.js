@@ -63,7 +63,12 @@ export const StateContext = ( { children } ) => {
             setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price) 
             settotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
         } else if(value === 'dec'){
-            
+            if(foundProduct.quantity > 1){
+                setCartItems([...cartItems, { ...foundProduct, quantity: foundProduct.quantity - 1  }]);
+                //setting the new price after reducing the number of items
+                setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price) 
+                settotalQuantities(prevTotalQuantities => prevTotalQuantities - 1)
+            }
         }
     }
  
@@ -91,6 +96,7 @@ export const StateContext = ( { children } ) => {
             incQty,
             decQty,
             onAdd,
+            toggleCartItemQuantity,
         }}
         >  
             {children}
