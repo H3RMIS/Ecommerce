@@ -13,6 +13,8 @@ export const StateContext = ( { children } ) => {
     const [totalQuantities, settotalQuantities] = useState(0) //to know the quantities of the items you are working with
     const [qty, setqty] = useState(1)
 
+    
+
     // return ContextProvider wrapping the values(state fields) that will be passed in the entire application
     //The values passed can be accessed from any of the componentsci
 
@@ -46,6 +48,11 @@ export const StateContext = ( { children } ) => {
         toast.success(`${qty} ${product.name} added to the cart`)
     }
 
+    //function to increment/decrement number of the select product in cart
+    const toggleCartItemQuantity = (id, value) => {
+        foundProduct = cartItems.find((item) => item._id === product._id)
+    }
+ 
     //dynamic update quantity function to manage incrementing items 
     const incQty = () => {
         setqty(( prevQty ) => prevQty + 1);
