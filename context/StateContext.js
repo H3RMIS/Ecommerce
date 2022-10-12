@@ -7,7 +7,7 @@ const Context = createContext(); //call as hook
 export const StateContext = ( { children } ) => {
     //create the states
     const [showCart, setShowCart] = useState(false); //manage the state of the cart if it's being shown or not
-    const [cartItems, setcartItems] = useState([]) //to know what items are in the cart. Will be filled with data coming from local storage
+    const [cartItems, setCartItems] = useState([]) //to know what items are in the cart. Will be filled with data coming from local storage
     //when user leaves site, the items will no get erased.
     const [totalPrice, settotalPrice] = useState(0) //keep track of the total price 
     const [totalQuantities, settotalQuantities] = useState(0) //to know the quantities of the items you are working with
@@ -16,7 +16,7 @@ export const StateContext = ( { children } ) => {
     
     let foundProduct; //product in cart
     let index;// index of product in cart
-    
+
     // return ContextProvider wrapping the values(state fields) that will be passed in the entire application
     //The values passed can be accessed from any of the componentsci
 
@@ -40,19 +40,26 @@ export const StateContext = ( { children } ) => {
             //the code tells that the item is already available in the cart
             //,instead it increments the quantity
             //number and total price
-            setcartItems(updatedcartItems);
+            setCartItems(updatedcartItems);
         }else{
             //item does not exist in the cart
             //i)Update the products quantity
             product.quantity = quantity;
-            setcartItems([...cartItems, { ...product }]);
+            setCartItems([...cartItems, { ...product }]);
         }
         toast.success(`${qty} ${product.name} added to the cart`)
     }
 
     //function to increment/decrement number of the select product in cart
     const toggleCartItemQuantity = (id, value) => {
-        foundProduct = cartItems.find((item) => item._id === product._id)
+        foundProduct = cartItems.find((item) => item._id === id);
+        index = cartItems.findIndex((product) => product._id === id);
+
+        if(value === 'inc'){
+            setCartItems([...cartItems, { ...product, quantity: product.quantity + 1  }]);
+        } else if(value === 'dec'){
+            
+        }
     }
  
     //dynamic update quantity function to manage incrementing items 
