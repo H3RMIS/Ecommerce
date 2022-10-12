@@ -55,16 +55,19 @@ export const StateContext = ( { children } ) => {
         foundProduct = cartItems.find((item) => item._id === id);
         index = cartItems.findIndex((product) => product._id === id);
 
+        //filter method to keep the items and not the one being updated  
+        const newCartItems = cartItems.filter((item) => item._id !== id) 
+
         if(value === 'inc'){
             //updating the cartItems with the current cartItems adding one element to it 
             //then spreading the properties and increasing the quantity by one.
-            setCartItems([...cartItems, { ...foundProduct, quantity: foundProduct.quantity + 1  }]);
+            setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1  }]);
             //setting the new price after adding item
             setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price) 
             settotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
         } else if(value === 'dec'){
             if(foundProduct.quantity > 1){
-                setCartItems([...cartItems, { ...foundProduct, quantity: foundProduct.quantity - 1  }]);
+                setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity - 1  }]);
                 //setting the new price after reducing the number of items
                 setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price) 
                 settotalQuantities(prevTotalQuantities => prevTotalQuantities - 1)
