@@ -8,11 +8,11 @@ const Context = createContext(); //call as hook
 export const StateContext = ( { children } ) => {
     //create the states
     const [showCart, setShowCart] = useState(false); //manage the state of the cart if it's being shown or not
-    const [cartItems, setCartItems] = useState([]) //to know what items are in the cart. Will be filled with data coming from local storage
+    const [cartItems, setCartItems] = useState([]); //to know what items are in the cart. Will be filled with data coming from local storage
     //when user leaves site, the items will no get erased.
-    const [totalPrice, setTotalPrice] = useState(0) //keep track of the total price 
-    const [totalQuantities, settotalQuantities] = useState(0) //to know the quantities of the items you are working with
-    const [qty, setqty] = useState(1)
+    const [totalPrice, setTotalPrice] = useState(0); //keep track of the total price 
+    const [totalQuantities, settotalQuantities] = useState(0); //to know the quantities of the items you are working with
+    const [qty, setqty] = useState(1);
 
     
     let foundProduct; //product in cart
@@ -52,8 +52,8 @@ export const StateContext = ( { children } ) => {
     }
 
     const onRemove = (product) => {
-        foundProduct = cartItems.find((item) => item._id === id);
-        const currCartItems = cartItems.filter((item) => item._id !== id)
+        foundProduct = cartItems.find((item) => item._id === product._id);
+        const currCartItems = cartItems.filter((item) => item._id !== product._id)
 
         setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity)
         settotalQuantities((prevTotalQuantities) => prevTotalQuantities - foundProduct.quantity)
