@@ -17,8 +17,8 @@ const Cart = () => {
     const response = await fetch('/api/stripe', {
       method: 'POST',
       headers: {        
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Content-Type': 'application/json 1',
+        'Accept': 'application/json',
       },
       body: JSON.stringify(cartItems),
     });
