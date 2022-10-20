@@ -7,13 +7,13 @@ import { useStateContext } from '../context/StateContext';
 
 
 const Success = () => {
-  const { setCartItems, setTotalPrice, setTotalQuantites } = useStateContext();
+  const { setCartItems, setTotalPrice, setTotalQuantities } = useStateContext();
 
   useEffect(() => {
     localStorage.clear();
     setCartItems([]);
     setTotalPrice(0);
-    setTotalQuantites(0);
+    setTotalQuantities(0);
   },[]);
   
   return (
