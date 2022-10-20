@@ -1,7 +1,7 @@
 **e-Commerce Demo Project**
 <img src="https://i.ibb.co/5FhcN5F/p1.png" />
 
-<h2>Technologies used<h2/>
+<h2>Technologies used</h2>
 
 1. React
 - Project demonstrates React best practises e.g File and Folder structure, Hooks and Refs
