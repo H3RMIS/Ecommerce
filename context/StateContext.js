@@ -11,7 +11,7 @@ export const StateContext = ( { children } ) => {
     const [cartItems, setCartItems] = useState([]); //to know what items are in the cart. Will be filled with data coming from local storage
     //when user leaves site, the items will no get erased.
     const [totalPrice, setTotalPrice] = useState(0); //keep track of the total price 
-    const [totalQuantities, settotalQuantities] = useState(0); //to know the quantities of the items you are working with
+    const [totalQuantities, setTotalQuantities] = useState(0); //to know the quantities of the items you are working with
     const [qty, setqty] = useState(1);
 
     
@@ -26,7 +26,7 @@ export const StateContext = ( { children } ) => {
         //check if the product being added is already in the cart
         const checkProductInCart = cartItems.find((item) => item._id === product._id);
         setTotalPrice((prevTotalPrice) => prevTotalPrice + product.price * quantity)
-        settotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity)
+        setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + quantity)
 
         //this will be executed if trying to add an item that already exists in the cart
         if(checkProductInCart) {
@@ -56,7 +56,7 @@ export const StateContext = ( { children } ) => {
         const currCartItems = cartItems.filter((item) => item._id !== product._id)
 
         setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity)
-        settotalQuantities((prevTotalQuantities) => prevTotalQuantities - foundProduct.quantity)
+        setTotalQuantities((prevTotalQuantities) => prevTotalQuantities - foundProduct.quantity)
         setCartItems(currCartItems)
     }
 
@@ -75,14 +75,14 @@ export const StateContext = ( { children } ) => {
 
             //setting the new price after adding item
             setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price) 
-            settotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
+            setTotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
         } else if(value === 'dec'){
             if(foundProduct.quantity > 1){
                 currCartItems.splice(index, 0, {...foundProduct, quantity: foundProduct.quantity-1})
                 setCartItems(currCartItems)    
                 //setting the new price after reducing the number of items
                 setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price) 
-                settotalQuantities(prevTotalQuantities => prevTotalQuantities - 1)
+                setTotalQuantities(prevTotalQuantities => prevTotalQuantities - 1)
             }
         }
     }
@@ -115,7 +115,7 @@ export const StateContext = ( { children } ) => {
             onRemove,
             setCartItems,
             setTotalPrice,
-            settotalQuantities
+            setTotalQuantities
         }}
         >  
             {children}
