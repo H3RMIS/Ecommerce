@@ -10,7 +10,7 @@
 2. Next.js
 - Used for file based routing,
 - Data fetching that allows server side rendering and static generation completely optimizing the application
-- Shows Next.js as backend endpoint
+- Shows Next.js as a backend endpoint
 <img src="https://i.ibb.co/yYqBvC6/p4.png" />
 
 3. Sanity
