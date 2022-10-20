@@ -10,7 +10,7 @@ const Navbar = () => {
 
     <div className='navbar-container'>
       <p className='logo'>
-        <Link href='/'>HERMES Store</Link>
+        <Link href='/'>HERMES_LOUD</Link>
       </p>
     
       <button type='button' className='cart-icon' onClick={() => setShowCart(true)}>
